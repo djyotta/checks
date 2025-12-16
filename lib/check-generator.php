@@ -92,7 +92,7 @@ class CheckGenerator {
 
 			// print check number
 			$pdf->SetXY( $x + 5.25, $y + 0.33 );
-			$pdf->Cell( 1, (11/72), $check['check_number'], 0, 'R' );
+			$pdf->Cell( 1, (11/72), sprintf('%04d', $check['check_number']), 0, 'R' );
 
 			$logo_offset = 0;  // offset to print name if logo is inserted
 			if( array_key_exists('logo',$check) && $check['logo'] != "" ) {
@@ -202,7 +202,7 @@ class CheckGenerator {
 
 			// routing and account number
 			$pdf->SetFont('Micr','',10);
-			$routingstring = "t".$check['routing_number']."t".$check['account_number']."o".$check['check_number'];
+			$routingstring = "t".$check['routing_number']."t".$check['account_number']."o".sprintf('%04d', $check['check_number']);
 			if(array_key_exists('codeline', $check))
 			  $routingstring = $check['codeline'];
 			$pdf->SetXY( $x + $cell_left, $y + 2.47 );
