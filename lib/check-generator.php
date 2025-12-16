@@ -139,6 +139,12 @@ class CheckGenerator {
 			$pdf->Cell( 2, (7/72), $check['bank_3'], 0, 2 );
 			$pdf->Cell( 2, (7/72), $check['bank_4'], 0, 2 );
 
+			// doge
+			$pdf->SetFont('Arial','',6);
+			$pdf->SetXY( $x + $cell_left + 4, $y + 1.6);
+			$pdf->Cell( 2, (1/72), "\x93Much value, very payable\x85 Wow!\x94" );
+
+
 			// memo
 			$pdf->Line( $x + $cell_left, $y + 2.225, $x + $cell_left + 2.9, $y + 2.225 );
 			$pdf->SetXY( $x + $cell_left, $y + 2.125);
@@ -173,14 +179,13 @@ class CheckGenerator {
 				//$dollars_str = TextualNumber::GetText($dollars);
 				$numtxt = new TextualNumber($dollars);
 				$dollars_str = $numtxt->numToWords($dollars);
-				
-				$amt_string = "***".ucfirst(strtolower($dollars_str))." dollars";
+				$amt_string = $check['bra'].ucfirst(strtolower($dollars_str))." dollars";
 				if( $cents > 0 ) {
 					$amt_string .= " and ".$cents."/100";
 				} else {
 					$amt_string .= " and 00/100";
 				}
-				$amt_string .= "***";
+				$amt_string .= $check['ket'];
 
 				$pdf->SetFont('Courier','',9);
 				$pdf->SetXY( $x + $cell_left, $y + 1.28);
@@ -189,6 +194,12 @@ class CheckGenerator {
 				#$amt = '$'.sprintf("%01.2f",$check['amount']);
 				$amt = '$'.number_format($check['amount'], 2);
 
+				$pdf->SetXY( $x + 4.5 + .06, $y + .83);
+				$pdf->Cell( 1, .25, $amt );
+			} else {
+				$amt = '$';
+
+				$pdf->SetFont('Courier','',9);
 				$pdf->SetXY( $x + 4.5 + .06, $y + .83);
 				$pdf->Cell( 1, .25, $amt );
 			}

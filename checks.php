@@ -22,6 +22,8 @@ $check['signature'] = "";
 
 $check['pay_to'] = "";
 $check['amount'] = '';
+$check['bra'] = "***";
+$check['ket'] = "***";
 $check['date'] = "";
 $check['memo'] = "";
 
