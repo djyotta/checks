@@ -31,7 +31,7 @@ $check['memo'] = "";
 $check['check_number'] = 1000;
 
 // read check config
-$config = parse_ini_file('check.ini', false, INI_SCANNER_TYPED);
+$config = parse_ini_file('checks.ini', false, INI_SCANNER_TYPED);
 foreach ($config as $key => $value) {
     //if (!empty($value)) {
     $check[$key] = $value;
