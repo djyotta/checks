@@ -28,6 +28,7 @@ $check['border'] = false;
 $check['date'] = "";
 $check['memo'] = "";
 
+$check['check_number'] = 1000;
 
 // read check config
 $config = parse_ini_file('check.ini', false, INI_SCANNER_TYPED);
@@ -38,8 +39,6 @@ foreach ($config as $key => $value) {
 }
 
 // 3 checks per page
-
-$check['check_number'] = 1000;
 $CHK->AddCheck($check);
 
 $check['check_number']++;
