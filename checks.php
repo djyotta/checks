@@ -24,8 +24,18 @@ $check['pay_to'] = "";
 $check['amount'] = '';
 $check['bra'] = "***";
 $check['ket'] = "***";
+$check['border'] = false;
 $check['date'] = "";
 $check['memo'] = "";
+
+
+// read check config
+$config = parse_ini_file('check.ini', false, INI_SCANNER_TYPED);
+foreach ($config as $key => $value) {
+    //if (!empty($value)) {
+    $check[$key] = $value;
+    //}
+}
 
 // 3 checks per page
 

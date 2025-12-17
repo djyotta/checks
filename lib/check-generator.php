@@ -84,6 +84,10 @@ class CheckGenerator {
 			//    margin        cell offset
 			$y = $top_margin  + (floor($pos/$columns) * $label_height);
 
+			if ( isset($check['border']) && $check['border'] ){
+				$pdf->Line( $x - $left_margin, $y + $label_height, $x + $label_width, $y + $label_height);
+				$pdf->Line( $x, $y, $x, $y + $page_height);
+			}
 
 			/////////////////
 			// set up check template
