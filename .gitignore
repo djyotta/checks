@@ -1,2 +1,6 @@
 .DS_Store
 checks.pdf
+
+*.cw.dat
+*.cw127.php
+*.mtx.php
