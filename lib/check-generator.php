@@ -66,8 +66,10 @@ class CheckGenerator {
 		
 
 		$pdf=new tFPDF('P','in',array($page_width,$page_height));
-		$pdf->AddFont('Arial','','liberation-fonts-ttf-2.1.5/LiberationSans-Regular.ttf', true);
-		$pdf->AddFont('Twcen','','urw-gothic/fonts/URWGothic-Book.ttf', true);
+		$pdf->AddFont('Arial','','DejaVuSans.ttf', true);
+		$pdf->AddFont('Arial','I','DejaVuSans-Oblique.ttf', true);
+		$pdf->AddFont('Twcen','','DejaVuSansCondensed.ttf', true);
+		$pdf->AddFont('Twcen','I','DejaVuSansCondensed-Oblique.ttf', true);
 		$pdf->AddFont('Micr','','micr-encoding/micrenc.ttf', true);
 		$pdf->AddFont('Courier','', 'DejaVuSansMono.ttf', true);
 		$pdf->SetMargins($left_margin,$top_margin);
