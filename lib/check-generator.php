@@ -1,5 +1,5 @@
 <?php
-require_once dirname(__FILE__)."/fpdf.inc.php";
+require_once dirname(__FILE__)."/tfpdf.inc.php";
 require_once dirname(__FILE__)."/textualnumber.php";
 
 class CheckGenerator {
@@ -65,10 +65,11 @@ class CheckGenerator {
 		$logo_width = 0.5; // marvelous labs
 		
 
-		$pdf=new FPDF('P','in',array($page_width,$page_height));
-		$pdf->AddFont('Twcen','','twcen.php');
-		$pdf->AddFont('Micr','','micr.php');
-		$pdf->AddFont('Courier','','courier.php');
+		$pdf=new tFPDF('P','in',array($page_width,$page_height));
+		$pdf->AddFont('Arial','','liberation-fonts-ttf-2.1.5/LiberationSans-Regular.ttf', true);
+		$pdf->AddFont('Twcen','','urw-gothic/fonts/URWGothic-Book.ttf', true);
+		$pdf->AddFont('Micr','','micr-encoding/micrenc.ttf', true);
+		$pdf->AddFont('Courier','', 'DejaVuSansMono.ttf', true);
 		$pdf->SetMargins($left_margin,$top_margin);
 		$pdf->SetDisplayMode("fullpage","continuous");
 		$pdf->AddPage();
@@ -122,10 +123,11 @@ class CheckGenerator {
 			$pdf->Cell( 1, (7/72), $date_str );
 
 			// pay to the order of
+			$pdf->SetFont('Twcen','',7);
 			$pdf->Line( $x + $cell_left, $y + 1.1, $x + $cell_left + 4.1, $y + 1.1 );
 			$pdf->SetXY( $x + $cell_left, $y + .88);
 			$pay_str = $this->matchcase($check['from_name'],"pay to the order of");
-			$pdf->MultiCell( .6, (7/72), $pay_str, '', '', 'L' );
+			$pdf->MultiCell( .6, (7/72), $pay_str, '', 'L' );
 
 			// amount box
 			$pdf->Rect( $x + 4.5, $y + .83, 1.1, .25 );
@@ -210,8 +212,8 @@ class CheckGenerator {
 
 
 			// routing and account number
-			$pdf->SetFont('Micr','',10);
-			$routingstring = sprintf("t%st%so%04d",
+			$pdf->SetFont('Micr','',22);
+			$routingstring = sprintf("a%sa%sc%04d",
 				$check['routing_number'], $check['account_number'], $check['check_number']
 			);
 			if(array_key_exists('codeline', $check))
