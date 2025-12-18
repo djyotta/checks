@@ -143,12 +143,6 @@ class CheckGenerator {
 			$pdf->Cell( 2, (7/72), $check['bank_3'], 0, 2 );
 			$pdf->Cell( 2, (7/72), $check['bank_4'], 0, 2 );
 
-			// doge
-			$pdf->SetFont('Arial','',6);
-			$pdf->SetXY( $x + $cell_left + 4, $y + 1.6);
-			$pdf->Cell( 2, (1/72), "\x93Much value, very payable\x85 Wow!\x94" );
-
-
 			// memo
 			$pdf->Line( $x + $cell_left, $y + 2.225, $x + $cell_left + 2.9, $y + 2.225 );
 			$pdf->SetXY( $x + $cell_left, $y + 2.125);
