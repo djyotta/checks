@@ -70,7 +70,7 @@ class CheckGenerator {
 		$pdf->AddFont('Arial','I','DejaVuSans-Oblique.ttf', true);
 		$pdf->AddFont('Twcen','','DejaVuSansCondensed.ttf', true);
 		$pdf->AddFont('Twcen','I','DejaVuSansCondensed-Oblique.ttf', true);
-		$pdf->AddFont('Micr','','micr-encoding/micrenc.ttf', true);
+		$pdf->AddFont('Micr','','gnumicr/GnuMICR.ttf', true);
 		$pdf->AddFont('Courier','', 'DejaVuSansMono.ttf', true);
 		$pdf->SetMargins($left_margin,$top_margin);
 		$pdf->SetDisplayMode("fullpage","continuous");
@@ -112,9 +112,9 @@ class CheckGenerator {
 
 			// name
 			$pdf->SetXY( $x + $cell_left + $logo_offset, $y + $cell_top + .1 );
-			$pdf->SetFont('Twcen','',10);
+			$pdf->SetFont('Twcen','',9);
 			$pdf->Cell( 2, (10/72), $check['from_name'], 0, 2 );
-			$pdf->SetFont('Twcen','',7);
+			$pdf->SetFont('Twcen','',6);
 			$pdf->Cell( 2, (7/72), $check['from_address1'], 0, 2 );
 			$pdf->Cell( 2, (7/72), $check['from_address2'], 0, 2 );
 
@@ -125,7 +125,7 @@ class CheckGenerator {
 			$pdf->Cell( 1, (7/72), $date_str );
 
 			// pay to the order of
-			$pdf->SetFont('Twcen','',7);
+			$pdf->SetFont('Twcen','',6);
 			$pdf->Line( $x + $cell_left, $y + 1.1, $x + $cell_left + 4.1, $y + 1.1 );
 			$pdf->SetXY( $x + $cell_left, $y + .88);
 			$pay_str = $this->matchcase($check['from_name'],"pay to the order of");
@@ -214,8 +214,8 @@ class CheckGenerator {
 
 
 			// routing and account number
-			$pdf->SetFont('Micr','',22);
-			$routingstring = sprintf("a%sa%sc%04d",
+			$pdf->SetFont('Micr','',12);
+			$routingstring = sprintf("A%sA%sC%04d",
 				$check['routing_number'], $check['account_number'], $check['check_number']
 			);
 			if(array_key_exists('codeline', $check))
@@ -229,7 +229,7 @@ class CheckGenerator {
 				$sig_offset = 1.75;  // width of signature
 				$pdf->Image($check['signature'], $x + $cell_left + 3.4, $y + 1.88, $sig_offset);
 			} else {
-				$pdf->SetFont('Arial','i',10);
+				$pdf->SetFont('Arial','i',9);
 				if( $check['signature'] != "" ) {
 					$pdf->SetXY( $x + $cell_left + 3.4, $y + 2.01);
 					$pdf->Cell( 1, .25, $check['signature'] );
@@ -237,7 +237,7 @@ class CheckGenerator {
 			}
 
 			// pre-authorized disclaimer
-			$pdf->SetFont('Arial','',6);
+			$pdf->SetFont('Arial','',5);
 			if( isset($check['pre_auth']) ) {
 				$pdf->SetXY( $x + $cell_left + 3.3, $y + 2.155);
 				$pdf->Cell( 1, .25, "This check is pre-authorized by your depositor" );
