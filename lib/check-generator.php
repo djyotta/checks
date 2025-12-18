@@ -217,7 +217,9 @@ class CheckGenerator {
 
 			// routing and account number
 			$pdf->SetFont('Micr','',10);
-			$routingstring = "t".$check['routing_number']."t".$check['account_number']."o".sprintf('%04d', $check['check_number']);
+			$routingstring = sprintf("t%st%so%04d",
+				$check['routing_number'], $check['account_number'], $check['check_number']
+			);
 			if(array_key_exists('codeline', $check))
 			  $routingstring = $check['codeline'];
 			$pdf->SetXY( $x + $cell_left, $y + 2.47 );
